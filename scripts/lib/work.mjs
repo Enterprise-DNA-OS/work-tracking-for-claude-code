@@ -86,7 +86,8 @@ export async function run(db,command,args=[],opts={}){
    id=await resolve(db,'projects',args[0]);
    if(command==='close-project'){
     const open=await db.query("SELECT id FROM tasks WHERE project_id=$1 AND status NOT IN ('done','cancelled') UNION ALL SELECT id FROM decisions WHERE project_id=$1 AND status='open'",[id]);if(open.length)throw Error('Close open tasks and decisions before closing the project');
-    await db.query("UPDATE projects SET status='closed',closed_on=CURRENT_DATE,retention_review_on=$1 WHERE id=$2",[date(opts.next),id]);
+    const next=date(opts.next);const [clock]=await db.query('SELECT CURRENT_DATE::text AS today');if(next<=clock.today)throw Error('Next review must be in the future');
+    await db.query("UPDATE projects SET status='closed',closed_on=CURRENT_DATE,retention_review_on=$1 WHERE id=$2",[next,id]);
    } else {
     const evidence=required(opts.evidence,'--evidence');const next=date(opts.next);const [clock]=await db.query('SELECT CURRENT_DATE::text AS today');if(next<=clock.today)throw Error('Next review must be in the future');
     await db.query(`UPDATE projects SET ${command==='review-access'?'access_review_on':'retention_review_on'}=$1 WHERE id=$2`,[next,id]);result={id,evidence,next};

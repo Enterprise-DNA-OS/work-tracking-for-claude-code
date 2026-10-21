@@ -56,6 +56,7 @@ try{
  await fails('review-access',[project],{next:'2020-01-01',evidence:'Checked'},/future/);
  await call('review-access',[project],{next:future,evidence:'Owner reviewed database users and folder permissions'});
  await call('review-retention',[project],{next:future,evidence:'Keep handover evidence for current contract review'});
+ await fails('close-project',[project],{next:'2020-01-01'},/future/);
  await call('close-project',[project],{next:future});await fails('add-task',['Late task'],{project},/closed/);
  const before=await count();await call('add-task',['Discard me'],{project:'Supplier onboarding','dry-run':true});assert.equal(await count(),before);
  const imp={project:'Supplier onboarding'};

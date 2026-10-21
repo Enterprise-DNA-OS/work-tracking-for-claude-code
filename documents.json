@@ -1,11 +1,34 @@
 [
   {
-    "name": "example",
-    "title": "TODO(author): the first document this industry must produce",
-    "for_each": "select gen_random_uuid() as id, 'Example' as name",
+    "name": "status-report",
+    "title": "Project status report",
+    "for_each": "SELECT id,name FROM projects ORDER BY name",
     "file": "name",
     "sections": [
-      { "title": "Details", "sql": "select 'replace me' as item, $1::text as record_id" }
+      {
+        "title": "Work",
+        "sql": "SELECT task,owner,status,due_on,remaining_hours,blockers FROM v_task_board WHERE project_id=$1 ORDER BY due_on NULLS LAST,task"
+      },
+      {
+        "title": "Decisions",
+        "sql": "SELECT name,status,due_on,outcome FROM decisions WHERE project_id=$1 ORDER BY due_on"
+      }
+    ]
+  },
+  {
+    "name": "handover",
+    "title": "Project handover record",
+    "for_each": "SELECT id,name FROM projects ORDER BY name",
+    "file": "name",
+    "sections": [
+      {
+        "title": "Review dates",
+        "sql": "SELECT name,status,access_review_on,retention_review_on FROM projects WHERE id=$1"
+      },
+      {
+        "title": "Notes",
+        "sql": "SELECT t.name,n.actor,n.body,n.created_at FROM notes n JOIN tasks t ON t.id=n.task_id WHERE t.project_id=$1 ORDER BY n.created_at"
+      }
     ]
   }
 ]

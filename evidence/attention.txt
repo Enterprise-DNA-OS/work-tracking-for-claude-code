@@ -1,0 +1,7 @@
+  project              task                           owner       due_on      reason                                           
+  -------------------  -----------------------------  ----------  ----------  -------------------------------------------------
+  Supplier onboarding  Approve supplier checklist     Aroha Chen  2026-10-18  Overdue; No update for over 7 days               
+  Customer handover    Confirm handover pack          Noah Patel  2026-10-20  Overdue; Manually blocked                        
+  Customer handover    Send pack for internal review  Mia Wilson  2026-10-26  Predecessor unfinished                           
+  Supplier onboarding  Archive old contact details    Unassigned              No owner; No due date; No update for over 7 days 
+  Supplier onboarding  Train account owners           Aroha Chen  2026-10-23  Predecessor unfinished; No update for over 7 days

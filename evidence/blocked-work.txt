@@ -1,0 +1,5 @@
+  project              task                           owner       due_on      blockers
+  -------------------  -----------------------------  ----------  ----------  --------
+  Customer handover    Confirm handover pack          Noah Patel  2026-10-20  0       
+  Customer handover    Send pack for internal review  Mia Wilson  2026-10-26  1       
+  Supplier onboarding  Train account owners           Aroha Chen  2026-10-23  1       

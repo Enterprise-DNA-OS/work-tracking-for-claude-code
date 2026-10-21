@@ -1,0 +1,3 @@
+Task ID,Task Name,Assigned To,Status,Due Date,Remaining Hours,Priority,Predecessors
+IMP-1,Confirm migration scope,Aroha Chen,Not Started,2026-12-01,2,High,
+IMP-2,Check exported task list,Noah Patel,Not Started,2026-12-03,4,Normal,1FS

@@ -2,12 +2,34 @@
   {
     "name": "week",
     "title": "This week",
-    "subtitle": "Work Tracking for Claude Code: what needs attention, rendered by npm run view",
     "sections": [
       {
-        "title": "Needs attention",
-        "note": "TODO(author): point this at the industry's attention view (overdue, stuck, quiet).",
-        "sql": "select 'replace me' as item, 'TODO(author)' as why"
+        "title": "Work needing attention",
+        "sql": "SELECT project,task,owner,due_on,reason FROM v_attention ORDER BY days_overdue DESC,task"
+      },
+      {
+        "title": "Owner workload",
+        "sql": "SELECT owner,weekly_hours,due_week_hours,over_capacity_hours,undated_tasks FROM v_owner_load ORDER BY owner"
+      }
+    ]
+  },
+  {
+    "name": "projects",
+    "title": "Project health",
+    "sections": [
+      {
+        "title": "Delivery status",
+        "sql": "SELECT project,owner,status,tasks,open,overdue,blocked FROM v_project_health ORDER BY project"
+      }
+    ]
+  },
+  {
+    "name": "reviews",
+    "title": "Review evidence",
+    "sections": [
+      {
+        "title": "Checks needing a person",
+        "sql": "SELECT record,finding,rule,source FROM v_compliance ORDER BY rule,record"
       }
     ]
   }
